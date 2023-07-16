@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: '/doctor-plus'
+spring:
+  application:
+    name: doctor-plus-gerenciador
+
+# /api-docs endpoint custom path
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    groups:
+      enabled: true
+    path: /api-docs
+  show-actuator: false
+
+doctor-plus:
+  security:
+    properties:
+      white-list: ["/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuarios"]
