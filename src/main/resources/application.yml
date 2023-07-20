@@ -20,4 +20,11 @@ springdoc:
 doctor-plus:
   security:
     properties:
-      white-list: ["/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuarios"]
+      white-list: ["/doctor-plus/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuario/profissional", "/endereco/**", "/device/**", "/autenticacao", "/autenticacao/**"]
+  feign:
+    client:
+      via-plus:
+        name: VIA-PLUS
+        url: https://viacep.com.br/ws/
+
+

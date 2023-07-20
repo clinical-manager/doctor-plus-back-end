@@ -11,6 +11,8 @@ spring:
     console:
       enabled: true
       path: /h2-console
+      settings.trace: false
+      settings.web-allow-others: false
 
   # JPA
   jpa:
@@ -20,7 +22,7 @@ spring:
 
   #Flyaway
   flyway:
-    locations: "classpath:/db/dev/migration"
+    locations: "classpath:/db/app/migration"
 
 
 security:

@@ -1,11 +1,10 @@
 package br.com.doctorplus.gerenciador.config.security;
 
-import br.com.doctorplus.gerenciador.model.UsuarioMapper;
+import br.com.doctorplus.gerenciador.model.mapper.UsuarioMapper;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
 import br.com.doctorplus.gerenciador.model.security.UsuarioAutenticacao;
 import br.com.doctorplus.gerenciador.model.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

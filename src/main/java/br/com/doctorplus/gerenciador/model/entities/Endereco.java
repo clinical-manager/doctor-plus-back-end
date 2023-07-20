@@ -1,6 +1,5 @@
 package br.com.doctorplus.gerenciador.model.entities;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,17 +14,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ORGANIZACOES")
-public class Organizacao {
+@Table(name = "ENDERECOS")
+public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME_SISTEMA")
-    private String nome;
+    @Column(name = "CEP")
+    private String cep;
 
-    @Column(name = "ACTIVE")
-    private boolean isAtivo;
+    @Column(name = "NUMERO")
+    private String numero;
+
+    @Column(name = "COMPLEMENTO")
+    private String complemento;
+
 
 }

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UnauthorizedException extends RuntimeException {
 
     public UnauthorizedException() {
-        super("Usuário não autorizado.");
+        super("Usuário não autenticado.");
     }
 }

@@ -8,12 +8,10 @@ import org.springframework.stereotype.Component;
 public class ResponseUtil {
     private final MessageUtil messageUtil;
     public ResponseSucesso buildResponse(String mensagem, Long id) {
-        ResponseSucesso sucesso = new ResponseSucesso(messageUtil.getMessage(mensagem, id), id);
-        return sucesso;
+        return new ResponseSucesso(messageUtil.getMessage(mensagem, id), id);
     }
 
     public ResponseSucesso buildResponse(String mensagem) {
-        ResponseSucesso sucesso = new ResponseSucesso(messageUtil.getMessage(mensagem), null);
-        return sucesso;
+        return new ResponseSucesso(messageUtil.getMessage(mensagem), null);
     }
 }

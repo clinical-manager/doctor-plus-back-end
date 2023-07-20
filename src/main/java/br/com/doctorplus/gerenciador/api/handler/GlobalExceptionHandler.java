@@ -1,5 +1,6 @@
 package br.com.doctorplus.gerenciador.api.handler;
 
+import br.com.doctorplus.gerenciador.model.exception.AcessDeniedException;
 import br.com.doctorplus.gerenciador.model.exception.GeneralException;
 import br.com.doctorplus.gerenciador.model.exception.NegocioException;
 import br.com.doctorplus.gerenciador.model.exception.NotFoundException;
@@ -30,7 +31,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = NegocioException.class)
-    public ResponseEntity<ResponseError> janaException(NegocioException e) {
+    public ResponseEntity<ResponseError> negocioException(NegocioException e) {
         String message = messageUtil.getMessage(e.getMessage());
         ResponseError err = new ResponseError(message, OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value());
         log.error("Error: {}", err);
@@ -40,6 +41,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = UnauthorizedException.class)
     public ResponseEntity<ResponseError> authentication(UnauthorizedException e) {
         ResponseError err = new ResponseError(e.getMessage(), OffsetDateTime.now(), HttpStatus.UNAUTHORIZED.value());
+        log.error("Error: {}", err);
+        return new ResponseEntity<>(err, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(value = AcessDeniedException.class)
+    public ResponseEntity<ResponseError> acessDenied(AcessDeniedException e) {
+        ResponseError err = new ResponseError(e.getMessage(), OffsetDateTime.now(), HttpStatus.FORBIDDEN.value());
         log.error("Error: {}", err);
         return new ResponseEntity<>(err, HttpStatus.UNAUTHORIZED);
     }
