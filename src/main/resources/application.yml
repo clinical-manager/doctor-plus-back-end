@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: doctor-plus-gerenciador
+  freemarker:
+    template-loader-path: classpath:/templates
+    suffix: .ftl
+    expose-spring-macro-helpers: true
 
 # /api-docs endpoint custom path
 springdoc:
@@ -20,7 +24,7 @@ springdoc:
 doctor-plus:
   security:
     properties:
-      white-list: ["/doctor-plus/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuario/profissional", "/endereco/**", "/device/**", "/autenticacao", "/autenticacao/**"]
+      white-list: ["/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuario/profissional", "/endereco/**", "/autenticacao/**", "/autenticacao"]
   feign:
     client:
       via-plus:

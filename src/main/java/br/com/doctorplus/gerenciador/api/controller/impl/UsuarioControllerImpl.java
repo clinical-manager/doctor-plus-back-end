@@ -6,9 +6,12 @@ import br.com.doctorplus.gerenciador.model.dtos.usuario.CadastrarUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
 import br.com.doctorplus.gerenciador.model.services.UsuarioService;
 import br.com.doctorplus.gerenciador.model.utils.ResponseSucesso;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

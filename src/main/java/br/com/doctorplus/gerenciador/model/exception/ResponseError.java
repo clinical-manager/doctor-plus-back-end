@@ -1,10 +1,13 @@
 package br.com.doctorplus.gerenciador.model.exception;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.NonNull;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
+@JsonInclude(JsonInclude.Include. NON_NULL)
 public record ResponseError(
-        @NonNull String mensagem, @NonNull OffsetDateTime timestamp, int statusCode
+        String mensagem, @NonNull OffsetDateTime timestamp, int statusCode, List<String> mensagens
 ) {
 }

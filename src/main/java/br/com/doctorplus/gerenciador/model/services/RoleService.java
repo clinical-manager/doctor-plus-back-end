@@ -15,7 +15,7 @@ public class RoleService {
     private final RoleRepository repository;
 
     public void mapearRole(Usuario usuario) {
-        Role role = repository.findByDescricao(FuncionalidadesEnum.ROLE_PROFISSIONAL_SAUDE.name());
+        Role role = repository.findByTipo(FuncionalidadesEnum.ROLE_PROFISSIONAL_SAUDE);
         usuario.setRole(role);
     }
 }

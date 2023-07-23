@@ -6,21 +6,22 @@ import br.com.doctorplus.gerenciador.model.dtos.usuario.CadastrarUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
 import br.com.doctorplus.gerenciador.model.exception.NegocioException;
 import br.com.doctorplus.gerenciador.model.exception.NotFoundException;
-import br.com.doctorplus.gerenciador.model.helper.PasswordEncoderHelper;
 import br.com.doctorplus.gerenciador.model.repositories.UsuarioRepository;
 import br.com.doctorplus.gerenciador.model.utils.ResponseSucesso;
 import br.com.doctorplus.gerenciador.model.utils.ResponseUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = {@Lazy})
 public class UsuarioService {
 
     private final UsuarioRepository repository;
-    private final PasswordEncoderHelper passwordEncoderHelper;
+    private final PasswordEncoder passwordEncoder;
     private final UsuarioMapper mapper;
     private final ResponseUtil response;
     private final EnderecoService enderecoService;
@@ -36,7 +37,7 @@ public class UsuarioService {
     public ResponseSucesso cadastrar(CadastrarUsuarioDTO cadastrarUsuarioDTO) {
         verificaSeUsuarioJaExiste(cadastrarUsuarioDTO.email());
         Usuario usuario = mapper.toUsuario(cadastrarUsuarioDTO);
-        usuario.setSenha(passwordEncoderHelper.criptografarSenha(cadastrarUsuarioDTO.senha()));
+        usuario.setPassword(passwordEncoder.encode(cadastrarUsuarioDTO.senha()));
         organizacaoService.mapearOrganizacao(cadastrarUsuarioDTO, usuario);
         enderecoService.mapearEndereco(cadastrarUsuarioDTO.endereco(), usuario);
         roleService.mapearRole(usuario);

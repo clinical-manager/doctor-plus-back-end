@@ -1,7 +1,9 @@
 package br.com.doctorplus.gerenciador.config.security;
 
+import br.com.doctorplus.gerenciador.model.entities.Usuario;
 import br.com.doctorplus.gerenciador.model.security.UsuarioAutenticacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,11 +24,10 @@ public class UserDetailsImpl implements UserDetails {
     private final String email;
     private final Long idOrganizacao;
     private final String nome;
+    private final String userName;
+    @JsonIgnore
+    private final String password;
 
-    @JsonIgnore
-    private String userName;
-    @JsonIgnore
-    private String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
     @Override
@@ -73,6 +74,8 @@ public class UserDetailsImpl implements UserDetails {
                 usuario.email(),
                 usuario.idOrganizacao(),
                 usuario.nome(),
+                usuario.email(),
+                usuario.password(),
                 authorityList
         );
     }

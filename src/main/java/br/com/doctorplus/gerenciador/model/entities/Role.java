@@ -3,6 +3,7 @@ package br.com.doctorplus.gerenciador.model.entities;
 
 import br.com.doctorplus.gerenciador.model.enums.FuncionalidadesEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,6 +26,8 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "DESCRICAO")
     private String descricao;
 
     @Enumerated(EnumType.STRING)
@@ -33,7 +36,7 @@ public class Role implements GrantedAuthority {
     @Override
     @JsonIgnore
     public String getAuthority() {
-        return this.descricao;
+        return this.tipo.name();
     }
 }
 

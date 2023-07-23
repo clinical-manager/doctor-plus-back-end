@@ -7,6 +7,8 @@ public record UsuarioAutenticacao(
         Long idOrganizacao,
         String nome,
         String email,
-        Role papel
+        Role papel,
+
+        String password
 ) {
 }

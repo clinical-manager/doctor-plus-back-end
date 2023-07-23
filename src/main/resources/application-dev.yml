@@ -5,6 +5,20 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
+  mail:
+    host: email-smtp.us-east-1.amazonaws.com
+    port: 587
+    username: AKIA35CZ7HEO42KSD3FS
+    password: BIEkIjgr0BCOCAAugP982SLfWa72Pk2hjNsXPc8htp1w
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connection-timeout: 5000
+          timeout: 3000
+          writetimeout: 5000
 
   # H2 Console
   h2:
@@ -19,14 +33,15 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+    show-sql: true
 
   #Flyaway
   flyway:
-    locations: "classpath:/db/app/migration"
+    locations: "classpath:/db/dev/migration"
 
 
 security:
   doctor-plus:
     auth:
-      jwtSecret: amFuYSBob21vbG9nYWNhbw==
+      jwtSecret: ======================amFuYSBob21vbG9nYWNhbw===========================
       jwtExpiration: 14400000

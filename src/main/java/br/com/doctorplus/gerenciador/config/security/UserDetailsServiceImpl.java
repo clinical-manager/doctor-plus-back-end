@@ -18,11 +18,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UsuarioMapper mapper;
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioService.buscarUsuarioPorUserName(username);
         UsuarioAutenticacao usuarioAutenticacao = mapper.mapperAutenticado(usuario);
-        //UsuarioAutenticacao usuarioAutenticacao = new UsuarioAutenticacao(usuario.getId(), usuario.getOrganizacao().getId(), usuario.getNome(), usuario.getEmail(), usuario.getFuncionalidade())
         return UserDetailsImpl.build(usuarioAutenticacao);
     }
 }

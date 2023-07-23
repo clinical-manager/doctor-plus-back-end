@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class OrganizacaoService {
     public void mapearOrganizacao(CadastrarUsuarioDTO cadastrarUsuarioDTO, Usuario usuario) {
         Organizacao organizacao = new Organizacao();
-        organizacao.setNome(cadastrarUsuarioDTO.nome());
+        organizacao.setNome(cadastrarUsuarioDTO.nome().trim());
         usuario.setOrganizacao(organizacao);
     }
 }

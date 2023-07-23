@@ -45,7 +45,7 @@ public class Usuario {
     private String email;
 
     @Column(name = "SENHA")
-    private String senha;
+    private String password;
 
     @Column(name = "TELEFONE")
     private String telefone;
@@ -54,7 +54,7 @@ public class Usuario {
     @JoinColumn(name = "ID_ORGANIZACAO")
     private Organizacao organizacao;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "ID_ROLE")
     private Role role;
 

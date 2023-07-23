@@ -1,19 +1,3 @@
-#spring:
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://wsrouter.cvnhp0k6nrad.us-east-2.rds.amazonaws.com:5432/wsrouter
-#    username: postgres
-#    password: blabluFlanguinho
-#  # JPA properties
-#  jpa:
-#    hibernate:
-#      ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
-#    show-sql: true
-#    database: postgresql
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    open-in-view: false
-#    generate-ddl: true
-
 
 security:
   doctor-plus:
