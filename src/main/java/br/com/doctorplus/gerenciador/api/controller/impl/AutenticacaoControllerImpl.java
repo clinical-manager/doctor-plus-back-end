@@ -5,6 +5,7 @@ import br.com.doctorplus.gerenciador.api.controller.AutenticacaoController;
 import br.com.doctorplus.gerenciador.model.dtos.autenticacao.JwtViewDTO;
 import br.com.doctorplus.gerenciador.model.dtos.autenticacao.LoginUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.services.AutenticacaoService;
+import br.com.doctorplus.gerenciador.model.utils.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,10 @@ public class AutenticacaoControllerImpl implements AutenticacaoController {
     @Override
     public ResponseEntity<JwtViewDTO> autenticar(LoginUsuarioDTO loginUsuarioDTO) {
         return new ResponseEntity<>(service.logar(loginUsuarioDTO), HttpStatus.ACCEPTED);
+    }
+
+    @Override
+    public ResponseEntity<ResponseUtil> esqueciSenha(LoginUsuarioDTO loginUsuarioDTO) {
+        return null;
     }
 }

@@ -6,10 +6,11 @@ spring:
     username: sa
     password:
   mail:
-    host: email-smtp.us-east-1.amazonaws.com
+    protocol: smtp
+    host: smtp.gmail.com
     port: 587
-    username: AKIA35CZ7HEO42KSD3FS
-    password: BIEkIjgr0BCOCAAugP982SLfWa72Pk2hjNsXPc8htp1w
+    username: doctorplusmanagement@gmail.com
+    password: tfeevbiegabyyfka
     properties:
       mail:
         smtp:
@@ -18,7 +19,10 @@ spring:
             enable: true
           connection-timeout: 5000
           timeout: 3000
-          writetimeout: 5000
+          write-timeout: 5000
+          socket-factory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
 
   # H2 Console
   h2:
@@ -33,7 +37,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
   #Flyaway
   flyway:

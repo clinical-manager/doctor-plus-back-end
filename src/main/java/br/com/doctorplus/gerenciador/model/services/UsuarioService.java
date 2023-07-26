@@ -9,6 +9,7 @@ import br.com.doctorplus.gerenciador.model.exception.NotFoundException;
 import br.com.doctorplus.gerenciador.model.repositories.UsuarioRepository;
 import br.com.doctorplus.gerenciador.model.utils.ResponseSucesso;
 import br.com.doctorplus.gerenciador.model.utils.ResponseUtil;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,12 +29,15 @@ public class UsuarioService {
     private final OrganizacaoService organizacaoService;
     private final RoleService roleService;
 
+    private final EmailService emailService;
+
     public Usuario buscarUsuarioPorUserName(String username) {
         return repository.findByEmail(username).orElseThrow(
                 () -> new NotFoundException("usuario.nao.encontrado")
         );
     }
 
+    @Transactional
     public ResponseSucesso cadastrar(CadastrarUsuarioDTO cadastrarUsuarioDTO) {
         verificaSeUsuarioJaExiste(cadastrarUsuarioDTO.email());
         Usuario usuario = mapper.toUsuario(cadastrarUsuarioDTO);
@@ -42,6 +46,7 @@ public class UsuarioService {
         enderecoService.mapearEndereco(cadastrarUsuarioDTO.endereco(), usuario);
         roleService.mapearRole(usuario);
         repository.save(usuario);
+        emailService.enviarEmailConfirmarCadastro(usuario);
         return response.buildResponse("usuario.criado.sucesso", null);
     }
 

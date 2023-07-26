@@ -1,6 +1,7 @@
 package br.com.doctorplus.gerenciador.model.entities;
 
 import br.com.doctorplus.gerenciador.model.enums.SexoEnum;
+import br.com.doctorplus.gerenciador.model.enums.StatusEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,6 +50,13 @@ public class Usuario {
 
     @Column(name = "TELEFONE")
     private String telefone;
+
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
+
+    @Column(name = "CODIGO_VERIFICACAO")
+    private String codigoVerificacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ORGANIZACAO")
