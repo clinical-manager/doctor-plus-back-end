@@ -5,7 +5,7 @@ import br.com.doctorplus.gerenciador.model.dtos.email.UsuarioEmailDTO;
 import br.com.doctorplus.gerenciador.model.dtos.usuario.CadastrarUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
 import br.com.doctorplus.gerenciador.model.enums.StatusEnum;
-import br.com.doctorplus.gerenciador.model.security.UsuarioAutenticacao;
+import br.com.doctorplus.gerenciador.model.dtos.security.UsuarioAutenticacao;
 import br.com.doctorplus.gerenciador.model.utils.MapperUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

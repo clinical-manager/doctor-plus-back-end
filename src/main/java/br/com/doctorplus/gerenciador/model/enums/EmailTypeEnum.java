@@ -7,9 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum EmailTypeEnum {
 
-    ESQUECI_SENHA("email-esqueci-senha.ftml"),
+    ESQUECI_SENHA("email-esqueci-senha.ftl"),
     CONFIRMAR_CADASTRO("email-confirmar-cadastro.ftl"),
-    MUDAR_SENHA("email-mudar-senha.ftl");
+    MUDAR_SENHA("email-senha-alterada-sucesso.ftl");
 
     private String name;
 

@@ -5,7 +5,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -33,12 +32,24 @@ public class JwtProvider {
     @Value("${security.doctor-plus.auth.jwtExpiration}")
     private Long jwtExpiration;
 
+    @Value("${security.doctor-plus.auth.jwtExpirationEmail}")
+    private Long jwtExpirationEmail;
+
 
     public String geneareteJwt(Authentication authentication) {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         return getToken(userDetails);
     }
 
+    public String criarJwtEmail(String email, Long id) {
+        return Jwts.builder()
+                .setSubject(id.toString())
+                .claim("email", email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + jwtExpirationEmail))
+                .signWith(key(), SignatureAlgorithm.HS256)
+                .compact();
+    }
 
     private Key key() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));

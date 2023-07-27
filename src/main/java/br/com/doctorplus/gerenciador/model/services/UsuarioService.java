@@ -1,16 +1,18 @@
 package br.com.doctorplus.gerenciador.model.services;
 
 
+import br.com.doctorplus.gerenciador.model.dtos.autenticacao.SenhaDTO;
 import br.com.doctorplus.gerenciador.model.dtos.autenticacao.VerificaCodigoDTO;
-import br.com.doctorplus.gerenciador.model.enums.StatusEnum;
-import br.com.doctorplus.gerenciador.model.mapper.UsuarioMapper;
 import br.com.doctorplus.gerenciador.model.dtos.usuario.CadastrarUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
+import br.com.doctorplus.gerenciador.model.enums.StatusEnum;
 import br.com.doctorplus.gerenciador.model.exception.NegocioException;
 import br.com.doctorplus.gerenciador.model.exception.NotFoundException;
+import br.com.doctorplus.gerenciador.model.mapper.UsuarioMapper;
 import br.com.doctorplus.gerenciador.model.repositories.UsuarioRepository;
 import br.com.doctorplus.gerenciador.model.utils.ResponseSucesso;
 import br.com.doctorplus.gerenciador.model.utils.ResponseUtil;
+import br.com.doctorplus.gerenciador.model.utils.SecurityUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -18,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
@@ -31,7 +32,7 @@ public class UsuarioService {
     private final EnderecoService enderecoService;
     private final OrganizacaoService organizacaoService;
     private final RoleService roleService;
-
+    private final SecurityUtil security;
     private final EmailService emailService;
 
     public Usuario buscarUsuarioPorUserName(String username) {
@@ -67,5 +68,14 @@ public class UsuarioService {
         Usuario usuario = repository.findByEmailAndCodigoVerificacao(verificaCodigoDTO.email(), verificaCodigoDTO.codigoVerificacao()).orElseThrow(() -> new NotFoundException("usuario.codigo.nao.existe"));
         usuario.setStatus(StatusEnum.ATIVO);
         repository.save(usuario);
+    }
+
+    public ResponseSucesso trocarSenha(SenhaDTO senhaDTO) {
+        String email = security.getEmail();
+        Usuario usuario = buscarUsuarioPorUserName(email);
+        usuario.setPassword(passwordEncoder.encode(senhaDTO.senha()));
+        repository.save(usuario);
+        emailService.enviarTrocaSenhaSucesso(usuario);
+        return response.buildResponse("senha.atualizada", null);
     }
 }

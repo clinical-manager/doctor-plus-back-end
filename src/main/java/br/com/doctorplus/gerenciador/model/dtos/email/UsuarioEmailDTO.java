@@ -12,4 +12,5 @@ public class UsuarioEmailDTO {
         private String nome;
         private String codigoVerificacao;
         private String host;
+        private String jwt;
 }

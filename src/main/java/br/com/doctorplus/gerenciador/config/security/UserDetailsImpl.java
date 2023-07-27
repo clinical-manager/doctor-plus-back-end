@@ -1,9 +1,7 @@
 package br.com.doctorplus.gerenciador.config.security;
 
-import br.com.doctorplus.gerenciador.model.entities.Usuario;
-import br.com.doctorplus.gerenciador.model.security.UsuarioAutenticacao;
+import br.com.doctorplus.gerenciador.model.dtos.security.UsuarioAutenticacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

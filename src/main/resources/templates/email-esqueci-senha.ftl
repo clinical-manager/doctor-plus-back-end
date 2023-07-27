@@ -116,7 +116,7 @@
 					<tr>
 						<td class="centraliza-texto">
 							<h2>
-								Olá, <span th:text="${USUARIO}"></span>!
+								Olá <span>${usuario.nome}</span>!
 							</h2>
 						</td>
 					</tr>
@@ -126,8 +126,7 @@
 								Você realizou uma solicitação de nova senha.
 							</p>
 							<p>
-								Sua nova senha é:
-								<br> <strong><span th:text="${NOVA_SENHA}"> </span></strong>
+								Clique no botação abaixo e você sera redirecionado para inserir uma nova senha
 							</p>
 
 							<p>Para alterar sua senha,
@@ -137,7 +136,7 @@
 					</tr>
 					<tr>
 						<td class="centraliza-texto">
-							<a th:href=${URL}>
+							<a href=${usuario.host}>
 								<button type="button">Alterar senha</button>
 							</a>
 						</td>
@@ -153,7 +152,7 @@
 						<td class="centraliza-texto">
 							<div class="div-mensagem-duvida">
 								<p class="mensagem-duvida">Em caso de qualquer dúvida, fique a vontade para responder esse
-									email ou pode nos contatar no email <span th:text="${EMAIL_APLICACAO}"></p>
+									email ou pode nos contatar no email <span doctorplusmanagement@gmail.com"></p>
 								<p class="centraliza-texto"><strong>DoctorPlus</strong></p>
 							</div>
 						</td>

@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-	<title >Confirmação de e-mail</title>
+	<title th:remove="all">Senha alterada</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<style type="text/css">
 		p {
@@ -46,6 +46,10 @@
 			color: #11C76F;
 		}
 
+		h4 {
+			color: #4F5E69 !important
+		}
+
 		.div-externa {
 			margin: auto;
 			min-width: 580px;
@@ -87,7 +91,7 @@
 
 		tbody {
 			width: 640px;
-			border: 1px solid #4F5E69;
+			border: 1px solid #7777774a;
 			border-radius: 2px;
 			padding-top: 20px;
 			padding-bottom: 20px;
@@ -95,6 +99,10 @@
 
 		table {
 			width: 640px;
+		}
+
+		i {
+			color: #777777;
 		}
 	</style>
 </head>
@@ -107,7 +115,7 @@
 					<tr>
 						<td>
 							<div class="centraliza-texto">
-								<img src="cid:logo-icone">
+								<img src="cid:logo">
 							</div>
 						</td>
 					</tr>
@@ -116,37 +124,20 @@
 					<tr>
 						<td class="centraliza-texto">
 							<h2>
-								Olá <span style="">${usuario.nome}</span>!<br>
-								Seja bem vindo(a) ao DoctorPlus!
+								Olá, <span>${usuario.nome}</span>!
 							</h2>
 						</td>
 					</tr>
 					<tr>
 						<td class="centraliza-texto">
-							<p>
-								Obrigado por se juntar a nós, você acabou de dar o primeiro passo para gerenciar melhor sua clínica.
-							</p>
-							<p>Agora só precisamos confirmar seu cadastro.
-								<br> Basta copiar o codigo de verificação abaixo
-							</p>
+							<h4>
+								Você realizou o cadastro de uma nova senha.
+							</h4>
 						</td>
 					</tr>
 					<tr>
 						<td class="centraliza-texto">
-							<button type="button">${usuario.codigoVerificacao}</button>
-						</td>
-					</tr>
-					<tr>
-						<td class="centraliza-texto">
-							<strong><a href=${usuario.host}>Verificar</a></strong>
-							<p>Depois disso, vai ser bem mais fácil planejar o futuro e realizar sonhos.</p>
-						</td>
-					</tr>
-					<tr>
-						<td class="centraliza-texto">
-							<p>Atenciosamento,
-								<br> Equipe DoctorPlus
-							</p>
+							<p><i>Caso você não tenha realizado este procedimento, por favor, responda esse e-mail.</i></p>
 						</td>
 					</tr>
 				</tbody>
@@ -154,9 +145,8 @@
 					<tr>
 						<td class="centraliza-texto">
 							<div class="div-mensagem-duvida">
-								<p class="mensagem-duvida">Em caso de qualquer dúvida, fique a vontade para responder
-									esse
-									email ou pode nos contatar no email <span>doctorplusmanagement@gmail.com</span></p>
+								<p class="mensagem-duvida">Em caso de qualquer dúvida, fique a vontade para responder esse
+									email ou pode nos contatar no email <span>doctorplusmanagement@gmail.com</p>
 								<p class="centraliza-texto"><strong>DoctorPlus</strong></p>
 							</div>
 						</td>
@@ -166,4 +156,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

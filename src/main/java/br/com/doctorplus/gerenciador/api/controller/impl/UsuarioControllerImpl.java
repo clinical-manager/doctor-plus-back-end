@@ -2,6 +2,7 @@ package br.com.doctorplus.gerenciador.api.controller.impl;
 
 import br.com.doctorplus.gerenciador.api.annotations.ApiController;
 import br.com.doctorplus.gerenciador.api.controller.UsuarioController;
+import br.com.doctorplus.gerenciador.model.dtos.autenticacao.SenhaDTO;
 import br.com.doctorplus.gerenciador.model.dtos.usuario.CadastrarUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
 import br.com.doctorplus.gerenciador.model.services.UsuarioService;
@@ -29,5 +30,10 @@ public class UsuarioControllerImpl implements UsuarioController {
     @Override
     public ResponseEntity<List<Usuario>> buscarTodos() {
         return new ResponseEntity<>(service.buscar(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseSucesso> trocarSenha(SenhaDTO senha) {
+        return new ResponseEntity<>(service.trocarSenha(senha), HttpStatus.ACCEPTED);
     }
 }

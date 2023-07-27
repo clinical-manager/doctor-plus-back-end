@@ -1,4 +1,4 @@
-package br.com.doctorplus.gerenciador.model.security;
+package br.com.doctorplus.gerenciador.model.dtos.security;
 
 import br.com.doctorplus.gerenciador.model.entities.Role;
 
