@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EnderecoService {
-
-    private final EnderecoRepository repository;
     private final EnderecoMapper mapper;
     private final ViaCepClient viaCepClient;
     public VisualizarEnderecoDTO buscarPeloCep(String cep) {

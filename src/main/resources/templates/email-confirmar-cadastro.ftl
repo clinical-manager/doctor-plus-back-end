@@ -107,7 +107,7 @@
 					<tr>
 						<td>
 							<div class="centraliza-texto">
-								<img src="http://localhost:8080/images/logo.png", width="50%" , alt="">
+								<img src="cid:logo-icone">
 							</div>
 						</td>
 					</tr>

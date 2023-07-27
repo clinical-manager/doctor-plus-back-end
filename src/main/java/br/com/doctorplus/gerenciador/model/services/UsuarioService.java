@@ -1,6 +1,8 @@
 package br.com.doctorplus.gerenciador.model.services;
 
 
+import br.com.doctorplus.gerenciador.model.dtos.autenticacao.VerificaCodigoDTO;
+import br.com.doctorplus.gerenciador.model.enums.StatusEnum;
 import br.com.doctorplus.gerenciador.model.mapper.UsuarioMapper;
 import br.com.doctorplus.gerenciador.model.dtos.usuario.CadastrarUsuarioDTO;
 import br.com.doctorplus.gerenciador.model.entities.Usuario;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
@@ -32,7 +35,7 @@ public class UsuarioService {
     private final EmailService emailService;
 
     public Usuario buscarUsuarioPorUserName(String username) {
-        return repository.findByEmail(username).orElseThrow(
+        return repository.findByEmailAndStatus(username, StatusEnum.ATIVO).orElseThrow(
                 () -> new NotFoundException("usuario.nao.encontrado")
         );
     }
@@ -58,5 +61,11 @@ public class UsuarioService {
 
     public List<Usuario> buscar() {
         return repository.findAll();
+    }
+
+    public void verificarCodigoConfirmacao(VerificaCodigoDTO verificaCodigoDTO) {
+        Usuario usuario = repository.findByEmailAndCodigoVerificacao(verificaCodigoDTO.email(), verificaCodigoDTO.codigoVerificacao()).orElseThrow(() -> new NotFoundException("usuario.codigo.nao.existe"));
+        usuario.setStatus(StatusEnum.ATIVO);
+        repository.save(usuario);
     }
 }

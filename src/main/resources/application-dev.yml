@@ -49,3 +49,6 @@ security:
     auth:
       jwtSecret: ======================amFuYSBob21vbG9nYWNhbw===========================
       jwtExpiration: 14400000
+
+email:
+  host: http://localhost:3000/

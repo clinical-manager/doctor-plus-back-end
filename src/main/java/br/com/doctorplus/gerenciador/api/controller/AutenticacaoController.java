@@ -5,6 +5,8 @@ import br.com.doctorplus.gerenciador.api.annotations.SpringDocApiErrorResponseDT
 import br.com.doctorplus.gerenciador.api.annotations.SpringDocApiResponseUtil;
 import br.com.doctorplus.gerenciador.model.dtos.autenticacao.JwtViewDTO;
 import br.com.doctorplus.gerenciador.model.dtos.autenticacao.LoginUsuarioDTO;
+import br.com.doctorplus.gerenciador.model.dtos.autenticacao.VerificaCodigoDTO;
+import br.com.doctorplus.gerenciador.model.utils.ResponseSucesso;
 import br.com.doctorplus.gerenciador.model.utils.ResponseUtil;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,7 +28,11 @@ public interface AutenticacaoController {
     ResponseEntity<JwtViewDTO> autenticar(@RequestBody LoginUsuarioDTO loginUsuarioDTO);
 
     @PostMapping("/esqueci-senha")
-    @SpringDocApiResponseUtil(summary = "Api para recuperar senha pelo e-amil")
+    @SpringDocApiResponseUtil(summary = "Api para recuperar senha pelo e-mail")
     ResponseEntity<ResponseUtil> esqueciSenha(@RequestBody LoginUsuarioDTO loginUsuarioDTO);
+
+    @PostMapping("/verifica-codigo")
+    @SpringDocApiResponseUtil(summary = "Api para verificar codigo de confirmação")
+    ResponseEntity<ResponseSucesso> verificaCodigo(@RequestBody VerificaCodigoDTO verificaCodigoDTO);
 
 }

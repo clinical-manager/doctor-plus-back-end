@@ -13,6 +13,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final Configuration config;
     private final UsuarioMapper mapper;
+    @Value("${email.host}")
+    private String host;
+
     public void enviarEmailConfirmarCadastro(Usuario usuario) {
         try {
             UsuarioEmailDTO usuarioEmailDTO = mapper.toUsuarioEmail(usuario);
@@ -40,7 +44,7 @@ public class EmailService {
     }
 
     private String montarHost(UsuarioEmailDTO usuario) {
-        return "http://localhost:3000/verificar?" + "email=" + usuario.getEmail() + "&" + "codigoVerificacao=" + usuario.getCodigoVerificacao();
+        return  this.host + "verificar?" + "email=" + usuario.getEmail() + "&" + "codigoVerificacao=" + usuario.getCodigoVerificacao();
     }
 
     public void enviarEmailFluxoUsuario(UsuarioEmailDTO userEventDTO, Email email, EmailTypeEnum emailType) throws MessagingException, TemplateException, IOException {
@@ -49,6 +53,7 @@ public class EmailService {
         mimeMessageHelper.setFrom(email.de());
         mimeMessageHelper.setTo(email.para());
         mimeMessageHelper.setSubject(email.subject());
+        adicionarImagem(mimeMessageHelper);
         String template = createHtmlTemplateConfirmarCadastro(userEventDTO, emailType);
         mimeMessageHelper.setText(template, true);
         javaMailSender.send(message);
@@ -62,4 +67,9 @@ public class EmailService {
         template.process(model, stringWriter);
         return stringWriter.getBuffer().toString();
     }
+
+    private void adicionarImagem(MimeMessageHelper messageHelper) throws MessagingException {
+        messageHelper.addInline("logo-icone", new ClassPathResource("images/logo-icone.png"));
+    }
+
 }
