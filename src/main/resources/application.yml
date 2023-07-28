@@ -24,11 +24,14 @@ springdoc:
 doctor-plus:
   security:
     properties:
-      white-list: ["/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuario/profissional", "/endereco/**", "/autenticacao/**", "/autenticacao"]
+      white-list: ["/h2-console/**", "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/usuario/profissional", "/apis-publica/**", "/autenticacao/**", "/autenticacao"]
   feign:
     client:
       via-plus:
         name: VIA-PLUS
         url: https://viacep.com.br/ws/
+      cnpj:
+        name: CNPJ
+        url: https://api-publica.speedio.com.br/
 
 

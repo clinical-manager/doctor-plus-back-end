@@ -48,6 +48,11 @@
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230618</version>
+		</dependency>
+		<dependency>
 			<groupId>no.api.freemarker</groupId>
 			<artifactId>freemarker-java8</artifactId>
 			<version>${freemarker-java-8.version}</version>
