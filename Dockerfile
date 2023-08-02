@@ -1,10 +1,8 @@
 FROM openjdk:17-jdk-slim
 
-VOLUME /tmp
-
 ARG JAR_FILE=target/*.jar
 
-ADD target/*.jar
+COPY ${JAR_FILE} app.jar
 
 RUN bash -c 'touch /app.jar'
 
