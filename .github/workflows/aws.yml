@@ -59,7 +59,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: staging
+        path: target/*.jar
       
     - name: Checkout
       uses: actions/checkout@v3
