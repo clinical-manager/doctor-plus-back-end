@@ -1,5 +1,8 @@
 FROM openjdk:17-jdk-slim
 
+RUN apk --no-cache add curl
+VOLUME /tmp
+
 ARG JAR_FILE=target/*.jar
 
 COPY ${JAR_FILE} app.jar
