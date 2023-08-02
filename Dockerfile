@@ -4,7 +4,7 @@ VOLUME /tmp
 
 ARG JAR_FILE=target/*.jar
 
-COPY ${JAR_FILE} app.jar
+ADD target/*.jar
 
 RUN bash -c 'touch /app.jar'
 
