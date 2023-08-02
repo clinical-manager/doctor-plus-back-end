@@ -28,7 +28,7 @@ name: Deploy to Amazon ECS
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "dev"]
 
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
@@ -44,6 +44,20 @@ permissions:
   contents: read
 
 jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    environment: hlg
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'maven'
+    - name: Build project
+      run: mvn clean package 
+    
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
