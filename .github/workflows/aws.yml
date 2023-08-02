@@ -54,11 +54,26 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: mvn clean install -DskipTests
-    - uses: actions/upload-artifact@v3
+
+    - name: Cache Maven packages
+      uses: actions/cache@v2
       with:
-        name: jar
-        path: target/*.jar
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+      # fazemos construção e publicação do artefato construído
+    - name: Maven Build and Publish
+      run: mvn -B deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - run: mkdir dist && cp target/*.jar dist
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Package
+        path: dist
       
     - name: Checkout
       uses: actions/checkout@v3
