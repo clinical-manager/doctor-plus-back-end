@@ -54,11 +54,10 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: mvn --batch-mode --update-snapshots verify -DskipTests
-    - run: mkdir staging && cp target/*.jar staging
+    - run: mvn clean install -DskipTests
     - uses: actions/upload-artifact@v3
       with:
-        name: Package
+        name: jar
         path: target/*.jar
       
     - name: Checkout
