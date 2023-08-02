@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@ApiController(path = "apis-publica", name = "Enderecos", description = "Api responsável pelas operações que envolvem endereços")
+@ApiController(path = "apis-publica", name = "Apis Publica", description = "Api responsável por integrações com apis publicas")
 public interface ApisPublicaController {
 
     @GetMapping("/cep/{cep}")
@@ -28,7 +28,7 @@ public interface ApisPublicaController {
             @ApiResponse(responseCode = "200", description = "Sucesso",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = VisualizarCnpjDTO.class))})})
-    @SpringDocApiErrorResponseDTO(summary = "Buscar um endereco pelo cep")
+    @SpringDocApiErrorResponseDTO(summary = "Buscar um cnpj via api publica")
     ResponseEntity<VisualizarCnpjDTO> buscarPeloCnpj(@PathVariable("cnpj") String cnpj);
 
 }
