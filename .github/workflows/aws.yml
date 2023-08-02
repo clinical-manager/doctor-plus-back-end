@@ -57,7 +57,12 @@ jobs:
         cache: 'maven'
     - name: Build project
       run: mvn clean package -DskipTests
-    
+    - uses: actions/checkout@v3
+    - run: mkdir -p target/
+    - run: echo hello > target/*.jar
+    - uses: actions/upload-artifact@v1
+      with:
+       path: target/   
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -66,7 +71,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - uses: actions/checkout@v1
 
+    - uses: actions/download-artifact@v1
+      with:
+          path: target/
+
+    - run: cat target/*.jar
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
