@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-slim
 
-ARG JAR_FILE=mkdir dist && cp target/*.jar dist
+ARG JAR_FILE= dist && cp target/*.jar dist
 
 COPY ${JAR_FILE} app.jar
 
