@@ -1,11 +1,11 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-alpine
 
-ARG JAR_FILE= dist && cp target/*.jar dist
+ENV APP_NAME doctor-plus
 
-COPY ${JAR_FILE} app.jar
+COPY ./target/*.jar /app/${APP_NAME}.jar
 
-RUN bash -c 'touch /app.jar'
+WORKDIR /app
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=hlg", "-jar","/app.jar", "-XX:MaxRAMPercentage=85.0 ","-XX:+UnlockExperimentalVMOptions","-XX:+UseCGroupMemoryLimitForHeap"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=hlg", "-jar","/app/${APP_NAME}.jar", "-XX:MaxRAMPercentage=85.0 ","-XX:+UnlockExperimentalVMOptions","-XX:+UseCGroupMemoryLimitForHeap"]
