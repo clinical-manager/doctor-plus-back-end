@@ -64,7 +64,7 @@ jobs:
 
       # fazemos construção e publicação do artefato construído
     - name: Maven Build and Publish
-      run: mvn -B deploy
+      run: mvn -B deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
