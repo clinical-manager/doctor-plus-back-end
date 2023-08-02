@@ -1,6 +1,49 @@
+spring:
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+    username: doctorplusmanagement@gmail.com
+    password: tfeevbiegabyyfka
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connection-timeout: 5000
+          timeout: 3000
+          write-timeout: 5000
+          socket-factory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.batch_size: 20
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_structured_entries: false
+      hibernate.cache.use_minimal_puts: false
+  datasource:
+    url: jdbc:postgresql://doctor-plus-hlg.cntadq5lnq2b.us-east-1.rds.amazonaws.com/postgres?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
+    username: doctorplushlg
+    password: vfNW4md6kY2Cr9JJOgS4
+    driverClassName: org.postgresql.Driver
+
+  #Flyaway
+  flyway:
+    locations: "classpath:/db/app/migration"
+
 
 security:
   doctor-plus:
     auth:
-      jwtSecret: amFuYSBob21vbG9nYWNhbw==
+      jwtSecret: ======================amFuYSBob21vbG9nYWNhbw===========================
       jwtExpiration: 14400000
+      jwtExpirationEmail: 1800000
+
+email:
+  host: http://localhost:3000/
