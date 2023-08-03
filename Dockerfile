@@ -1,10 +1,14 @@
 FROM openjdk:17-alpine
 
+COPY . /usr/app
+WORKDIR /usr/app
+RUN chmod +x mvnw \
+    && ./mvnw --version \
+    && ./mvnw clean package -DskipTests
+
 ENV APP_NAME doctor-plus
 
-COPY ./target/*.jar /app/${APP_NAME}.jar
-
-WORKDIR /app
+COPY --from=build /usr/app/target/*.jar /app/${APP_NAME}.jar
 
 EXPOSE 8080
 
