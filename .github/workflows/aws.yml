@@ -60,12 +60,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: mvn clean install -DskipTests
-    - run: mkdir dist && cp target/*.jar dist
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Package
-        path: dist
+    - name: Build with Maven
+      run: mvn -B package -Pprod --file pom.xml -DskipTests
 
     - name: Checkout
       uses: actions/checkout@v3
@@ -90,7 +86,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg ACCESS_ARG=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg SECRET_ARG=${{ secrets.AWS_SECRET_ACCESS_KEY }} .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
